@@ -1,0 +1,98 @@
+09.25 20:46
+Week 7
+import pandas as pd
+
+
+data = {
+    "Prod_No": [101, 102, 103, 104, 105],
+    "Prod_Name": ["Product A", "Product B", "Product C", "Product D", "Product E"],
+    "Jan": [1000, 2000, 3000, 4000, 5000],
+    "Feb": [1100, 2200, 3300, 4400, 5500],
+    "Mar": [1200, 2400, 3600, 4800, 6000],
+    "Apr": [1300, 2600, 3900, 5200, 6500],
+    "May": [1400, 2800, 4200, 5600, 7000],
+    "Jun": [1500, 3000, 4500, 6000, 7500],
+}
+
+df = pd.read_csv("product_selling.csv")
+
+df.columns = ["Product No", "Product Name", "January", "February", "March", "April", "May", "June"]
+
+
+
+df["Total Sell"] = df.iloc[:, 2:].sum(axis=1)
+df["Average Sell"] = df.iloc[:, 2:8].mean(axis=1)
+
+
+
+new_rows = pd.DataFrame({"Product No": [106, 107], "Product Name": ["Product F", "Product G"]})
+df = pd.concat([df, new_rows], ignore_index=True)
+
+
+new_rows = pd.DataFrame({"Product No": [108, 109], "Product Name": ["Product H", "Product I"]})
+df = pd.concat([df.iloc[:3], new_rows, df.iloc[3:]], ignore_index=True)
+
+
+print(df.head(5))
+
+
+print(df.tail(5))
+
+
+print(df.iloc[5:10])
+
+print(df["Product Name"])
+
+print(df[["Product No", "Product Name", "January"]])
+
+
+filtered_df = df[(df["January"] > 5000) & (df["February"] > 8000)][["Product No", "Product Name"]]
+print(filtered_df)
+
+
+sorted_df = df.sort_values(by="Product Name")
+print(sorted_df)
+
+
+print(df.iloc[1::2])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
